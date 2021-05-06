@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import  SearchIcon from '../assets/search.svg'
 import  RoomsIcon from '../assets/rooms.svg'
+import RoomItem from './RoomItem'
 
 export default function Rooms() {
   return (
@@ -18,7 +19,7 @@ export default function Rooms() {
         </View>
       </View>
       <View style={styles.body}>
-        <Text>room 1</Text>
+        <RoomItem />
       </View>
     </View>
   );
