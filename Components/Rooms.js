@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import  SearchIcon from '../assets/search.svg'
+import  RoomsIcon from '../assets/rooms.svg'
 
 export default function Rooms() {
   return (
@@ -8,12 +10,15 @@ export default function Rooms() {
         <Text style={styles.headerTitle}>Rooms</Text>
         <View style={styles.headerIcons}>
           <View style={styles.icon}>
-            <Text>ic1</Text>
+            <SearchIcon />
           </View>
           <View style={styles.icon}>
-            <Text>ic2</Text>
+            <RoomsIcon />
           </View>
         </View>
+      </View>
+      <View style={styles.body}>
+        <Text>room 1</Text>
       </View>
     </View>
   );
@@ -50,12 +55,10 @@ const styles = StyleSheet.create({
     },
 
   icon: {
-    justifyContent: "center",
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
     marginHorizontal: 4
+  },
+
+  body: {
+    flex: 1,
   }
 });
