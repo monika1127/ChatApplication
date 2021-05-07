@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery} from "@apollo/client";
 
 import {
   StyleSheet,
@@ -10,19 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import {USER_ROOMS} from "../queries/queries"
 import ProfileIcon from "../assets/profile.svg";
-
-const USER_ROOMS = gql`
-  query GetRoom {
-    usersRooms {
-      rooms {
-        id
-        name
-        roomPic
-      }
-    }
-  }
-`;
 
 export default function Rooms({ navigation }) {
   const { loading, error, data } = useQuery(USER_ROOMS);
@@ -32,11 +21,10 @@ export default function Rooms({ navigation }) {
 
   return (
     <View style={styles.container}>
-
         <ScrollView>
           {data.usersRooms.rooms.map((room) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("Chat")}
+              onPress={() => navigation.navigate("Chat", {roomId: room.id})}
               style={styles.roomItem}
               key={room.id}
             >
