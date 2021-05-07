@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
+import  PhoneIcon from '../assets/phone.svg'
+import  VideoIcon from '../assets/videocall.svg'
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
-
-  console.log(messages);
 
   useEffect(() => {
     setMessages([
@@ -30,17 +30,29 @@ export default function Chat() {
 
   return (
     <View style={styles.container}>
-      <GiftedChat
-        messages={messages}
-        onSend={(messages) => onSend(messages)}
-        user={{
-          _id: 1,
-        }}
-      />
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Chat</Text>
+        <View style={styles.headerIcons}>
+          <View style={styles.icon}>
+            <PhoneIcon />
+          </View>
+          <View style={styles.icon}>
+            <VideoIcon />
+          </View>
+        </View>
+      </View>
+      <View style={styles.body}>
+        <GiftedChat
+          messages={messages}
+          onSend={(messages) => onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+      </View>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -79,4 +91,3 @@ const styles = StyleSheet.create({
     flex: 1,
   }
 });
-
