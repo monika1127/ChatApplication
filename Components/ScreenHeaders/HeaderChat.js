@@ -1,18 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View} from "react-native";
-import  SearchIcon from '../../assets/search.svg'
-import  RoomsIcon from '../../assets/rooms.svg'
+import { View, Text, StyleSheet } from "react-native";
+import  PhoneIcon from '../../assets/phone.svg'
+import  VideoIcon from '../../assets/videocall.svg'
 
-export default function Header() {
+export default function HeaderChat() {
+
   return (
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Rooms</Text>
+        <Text style={styles.headerTitle}>Chat</Text>
         <View style={styles.headerIcons}>
           <View style={styles.icon}>
-            <SearchIcon />
+            <PhoneIcon />
           </View>
           <View style={styles.icon}>
-            <RoomsIcon />
+            <VideoIcon />
           </View>
         </View>
       </View>
