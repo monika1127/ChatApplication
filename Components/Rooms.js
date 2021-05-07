@@ -1,26 +1,59 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import  SearchIcon from '../assets/search.svg'
-import  RoomsIcon from '../assets/rooms.svg'
-import RoomItem from './RoomItem'
+import { useQuery, gql } from "@apollo/client";
 
-export default function Rooms() {
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+
+import ProfileIcon from "../assets/profile.svg";
+
+const USER_ROOMS = gql`
+  query GetRoom {
+    usersRooms {
+      rooms {
+        id
+        name
+        roomPic
+      }
+    }
+  }
+`;
+
+export default function Rooms({ navigation }) {
+  const { loading, error, data } = useQuery(USER_ROOMS);
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error</Text>;
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Rooms</Text>
-        <View style={styles.headerIcons}>
-          <View style={styles.icon}>
-            <SearchIcon />
-          </View>
-          <View style={styles.icon}>
-            <RoomsIcon />
-          </View>
-        </View>
-      </View>
-      <View style={styles.body}>
-        <RoomItem />
-      </View>
+
+        <ScrollView>
+          {data.usersRooms.rooms.map((room) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Chat")}
+              style={styles.roomItem}
+              key={room.id}
+            >
+              {room.roomPic ? (
+                <Image
+                  style={styles.roomPicture}
+                  source={{
+                    uri: room.roomPic,
+                  }}
+                />
+              ) : (
+                <ProfileIcon />
+              )}
+              <Text>{room.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
     </View>
   );
 }
@@ -32,34 +65,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
   },
-  header: {
-    // flex:1,
+
+  roomPicture: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+  },
+  roomItem: {
+    backgroundColor: "white",
+    marginVertical: 4,
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: 'center',
-    paddingTop: 50,
-    paddingBottom: 16,
-    paddingHorizontal: 16,
-    backgroundColor: "#b6defd",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    padding: 8,
+    borderRadius: 16,
   },
-
-  headerTitle: {
-    color: "#5603ad",
-    fontWeight: "bold",
-    fontSize: 28,
-  },
-
-  headerIcons: {
-    flexDirection: "row",
-    },
-
-  icon: {
-    marginHorizontal: 4
-  },
-
-  body: {
-    flex: 1,
-  }
 });
