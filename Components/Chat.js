@@ -4,10 +4,12 @@ import { GiftedChat } from "react-native-gifted-chat";
 import { SEND_MESSAGE, ROOM_MESSAGES } from "../queries/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { formatMessage } from "./helpers/formatters";
+import { useCurrentUser } from "../contexts/userContext";
 
 export default function Chat({ route }) {
   const { roomId } = route.params;
   const [messages, setMessages] = useState([]);
+  const user = useCurrentUser();
 
   const { loading, data } = useQuery(ROOM_MESSAGES, {
     variables: { id: roomId },
@@ -29,15 +31,10 @@ export default function Chat({ route }) {
     setMessages((prev) => GiftedChat.append(prev, messages));
   }, []);
 
+  if (!user) return null;
   return (
     <View style={styles.container}>
-      <GiftedChat
-        messages={messages}
-        onSend={onSend}
-        user={{
-          _id: "8a57f5a4-0d29-4b27-9cfa-106420671e3c",
-        }}
-      />
+      <GiftedChat messages={messages} onSend={onSend} user={{ _id: user.id }} />
     </View>
   );
 }
