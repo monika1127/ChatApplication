@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { client } from "./auth/auth";
 import { ApolloProvider } from "@apollo/client/react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { useFonts, Poppins_300Light, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading';
 
 import Chat from "./Components/Chat";
 import Rooms from "./Components/Rooms";
@@ -14,6 +17,16 @@ import { ContextProvider } from "./contexts/userContext";
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded]=useFonts({
+    Poppins_300Light,
+    Poppins_400Regular,
+    Poppins_700Bold
+  })
+
+  if (!fontsLoaded){
+    return <AppLoading  />
+  }
+
   return (
     <ApolloProvider client={client}>
       <ContextProvider>
