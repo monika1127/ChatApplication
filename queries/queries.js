@@ -1,5 +1,18 @@
 import { gql } from "@apollo/client";
 
+export const CURRENT_USER = gql`
+  query GetCurrentUser {
+    user {
+      email
+      firstName
+      id
+      lastName
+      profilePic
+      role
+    }
+  }
+`;
+
 export const USER_ROOMS = gql`
   query GetRoom {
     usersRooms {
@@ -13,7 +26,7 @@ export const USER_ROOMS = gql`
 `;
 
 export const ROOM_MESSAGES = gql`
-  query GetMessages($id: String!)  {
+  query GetMessages($id: ID!) {
     room(id: $id) {
       messages {
         id
@@ -24,6 +37,21 @@ export const ROOM_MESSAGES = gql`
           id
           profilePic
         }
+      }
+    }
+  }
+`;
+
+export const SEND_MESSAGE = gql`
+  mutation sendMessage($body: String!, $roomId: String!) {
+    sendMessage(body: $body, roomId: $roomId) {
+      id
+      body
+      insertedAt
+      user {
+        firstName
+        id
+        profilePic
       }
     }
   }
