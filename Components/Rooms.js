@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f8ff",
     justifyContent: "flex-start",
     width: "100%",
+    paddingVertical: 16
   },
 });

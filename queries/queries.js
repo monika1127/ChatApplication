@@ -56,3 +56,18 @@ export const SEND_MESSAGE = gql`
     }
   }
 `;
+
+export const MESSAGE_ADDED = gql`
+  subscription MessageAdded($roomId: String!) {
+    messageAdded(roomId: $roomId) {
+      id
+      body
+      insertedAt
+      user {
+        firstName
+        id
+        profilePic
+      }
+    }
+  }
+`;
