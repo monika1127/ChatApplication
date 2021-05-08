@@ -3,7 +3,7 @@ import { useQuery, useSubscription } from "@apollo/client";
 import PropTypes from "prop-types";
 import { useNavigation } from "@react-navigation/core";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-
+import { useIsFocused } from '@react-navigation/native';
 import ProfileIcon from "../assets/profile.svg";
 import { MESSAGE_ADDED, ROOM_MESSAGES } from "../queries/queries";
 
@@ -12,7 +12,7 @@ export default function RoomItem(props) {
   const navigation = useNavigation();
   const [lastMessage, setLastMessage] = useState();
   const [unreadedMsg, setUnreadedMsg] = useState(false);
-
+  const isFocused = useIsFocused()
   // loding messages when component render
   const { loading, data } = useQuery(ROOM_MESSAGES, {
     variables: { id },
@@ -32,7 +32,7 @@ export default function RoomItem(props) {
   useEffect(() => {
     if (subData) {
       setLastMessage(subData.messageAdded.body);
-      setUnreadedMsg(true);
+      isFocused && setUnreadedMsg(true);
     }
   }, [subData]);
 
