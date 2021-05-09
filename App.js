@@ -5,7 +5,7 @@ import { ApolloProvider } from "@apollo/client/react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { useFonts, Poppins_300Light, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import { useFonts, Poppins_300Light, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 
 import Chat from "./Components/Chat";
@@ -20,7 +20,8 @@ export default function App() {
   const [fontsLoaded]=useFonts({
     Poppins_300Light,
     Poppins_400Regular,
-    Poppins_700Bold
+    Poppins_700Bold,
+    Poppins_500Medium
   })
 
   if (!fontsLoaded){

@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: 'center',
-    paddingTop: 50,
-    paddingBottom: 16,
+    alignItems: "center",
+    paddingTop: 72,
+    paddingBottom: 8,
     paddingHorizontal: 16,
     backgroundColor: "#b6defd",
     borderBottomLeftRadius: 20,
@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
 
   headerTitle: {
     color: "#5603ad",
-    fontWeight: "bold",
-    fontSize: 28,
+    fontSize: 36,
+    fontFamily: 'Poppins_700Bold',
+    lineHeight: 40
   },
 
   headerIcons: {

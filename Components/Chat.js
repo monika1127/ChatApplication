@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import {  GiftedChat, Send, InputToolbar, Composer } from "react-native-gifted-chat";
+import {  GiftedChat, Send, InputToolbar, Bubble} from "react-native-gifted-chat";
 import SendIcon from "../assets/send.svg";
 import { SEND_MESSAGE, ROOM_MESSAGES, MESSAGE_ADDED } from "../queries/queries";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
@@ -59,6 +59,34 @@ export default function Chat({ route }) {
       return <InputToolbar {...props} containerStyle={styles.msgContainer} />
   }
 
+
+  const renderBubble = (props)=> {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "#5603ad",
+            fontFamily: 'Poppins_300Light',
+          },
+          left: {
+            backgroundColor: "white",
+            fontFamily: 'Poppins_300Light',
+          }
+        }}
+        textStyle={{
+          right: {
+            fontFamily: 'Poppins_300Light',
+          },
+          left: {
+            fontFamily: 'Poppins_300Light',
+          }
+        }}
+      />
+    )
+  }
+
+
   if (!user) return null;
   return (
     <View style={styles.container}>
@@ -70,6 +98,7 @@ export default function Chat({ route }) {
         renderSend={renderSend}
         renderInputToolbar={renderInputToolbar}
         textInputStyle={styles.msgInput}
+        renderBubble={renderBubble}
       />
     </View>
   );

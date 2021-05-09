@@ -62,9 +62,9 @@ export default function RoomItem(props) {
           {name}
         </Text>
         {loading ? (
-          <Text style={[unreadedMsg ? styles.textWhite : styles.textBlack]}>Loading...</Text>
+          <Text style={[styles.roomDetails, unreadedMsg ? styles.textWhite : styles.textBlack]}>Loading...</Text>
         ) : (
-          <Text numberOfLines={1} style={[unreadedMsg ? styles.textWhite : styles.textBlack]}>
+          <Text numberOfLines={1} style={[ styles.roomDetails, unreadedMsg ? styles.textWhite : styles.textBlack]}>
             {lastMessage}
           </Text>
         )}
@@ -105,8 +105,12 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   roomTitle: {
-    fontWeight: "bold",
     fontSize: 16,
+    fontFamily: 'Poppins_500Medium'
+  },
+  roomDetails: {
+    fontFamily: 'Poppins_300Light',
+    fontSize: 12,
   },
   textWhite: {
     color: "white",
